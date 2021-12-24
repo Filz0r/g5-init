@@ -1,0 +1,442 @@
+[colors]
+danger          = #fc0505
+green           = #3adb2b
+blue            = #1b94d6
+background      = #222
+background-alt  = #444
+foreground      = #dfdfdf
+foreground-alt  = #555
+primary         = #ffb52a
+secondary       = #e60053
+alert           = #bd2c40
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 10
+margin-bottom = 100
+offset-y = 20
+
+################################################################################
+# BARS
+################################################################################
+
+[bar/qtile]
+monitor = ${env:MONITOR}
+width = 100%
+height = 30
+radius = 0.0
+fixed-center = true
+bottom = false
+background = ${colors.background}
+foreground = ${colors.foreground}
+underline-size = 3
+underline-color = ${colors.blue}
+module-margin-left = 0
+module-margin-right = 1
+padding-left = 1
+padding-right = 1
+tray-position = ${env:DP-3:right}
+tray-padding = 0
+cursor-click = default
+cursor-scroll = default
+override-redirect = true
+enable-ipc = true
+border-size = 0
+font-0 = Fira Mono:pixelsize=10:antialias=true;1
+font-1 = Font Awesome 5 Free:size=10:antialias=true:style=Solid;1
+font-2 = Font Awesome 5 Brands:size=10:antialias=true:style=Solid;1
+font-3 = Symbols Nerd Font:size=10:antialias=true:style=Solid;1
+font-4 = NotoColorEmoji:fontformat=truetype:scale=10:antialias=false;1
+modules-left = ewmh previous playpause next spotify
+modules-center = date weather
+modules-right = mpd memory temperature cpu nvidia updates volume battery 
+;previous playpause next spotify
+
+[bar/topbar]
+monitor = ${env:MONITOR}
+width = 100%
+height = 30
+;offset-x = -1%
+;offset-y = -3%
+radius = 0
+fixed-center = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+border-size = 0
+font-0 = Fira Mono:pixelsize=10:antialias=true;1
+font-1 = Font Awesome 5 Free:size=10:antialias=true:style=Solid;1
+font-2 = Font Awesome 5 Brands:size=10:antialias=true:style=Solid;1
+font-3 = Symbols Nerd Font:size=10:antialias=true:style=Solid;1
+font-4 = NotoColorEmoji:fontformat=truetype:scale=10:antialias=false;1
+underline-size = 3
+underline-color = ${colors.blue}
+module-margin-left = 1
+module-margin-right = 0
+padding-left = 0
+padding-right = 1
+modules-left = i3 previous playpause next spotify
+modules-center = date weather
+modules-right = mpd memory temperature cpu nvidia updates battery volume
+tray-position = ${env:MONITOR=DP-3:right}
+tray-padding = 1
+;tray-background = #0063ff
+cursor-click = default
+cursor-scroll = default
+enable-ipc = true
+override-redirect = true
+wm-restack = i3
+
+################################################################################
+# MODULES
+################################################################################
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+pin-workspaces = true
+label-mode-padding = 1
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-foreground = ${colors.blue}
+label-focused-underline= ${colors.blue}
+label-focused-padding = 2
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon%
+label-unfocused-padding = 1
+label-unfocused-foreground = ${colors.foreground}
+label-unfocused-underline = ${colors.foreground}
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-foreground = ${colors.blue}
+label-visible-underline = ${colors.foreground}
+label-visible-padding = 1
+; urgent = Workspace with urgency hint set
+label-urgent = %icon%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+; Separator in between workspaces
+;label-separator =
+;label-separator-foreground = #fcd00a
+;fuzzy-match = true
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+;ws-icon-default = 
+
+[module/ewmh]
+type = internal/xworkspaces
+; Only show workspaces defined on the same output as the bar
+pin-workspaces = false 
+; Create click handler used to focus desktop
+enable-click = true
+; Create scroll handlers used to cycle desktops
+enable-scroll = true
+icon-0 = 1;
+icon-1 = 2;
+icon-2 = 3;
+icon-3 = 4;
+icon-4 = 5;
+icon-5 = 6;
+icon-6 = 7;
+icon-7 = 8;
+icon-8 = 9;
+icon-default = ""
+format = <label-state> 
+label-monitor = %icon% 
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-foreground = ${colors.blue}
+label-visible-background = ${colors.primary}
+label-active =  %icon%
+label-active-foreground = ${colors.blue}
+label-active-background = ${colors.background}
+label-active-underline = ${colors.blue}
+label-active-padding = 1
+label-occupied = %icon%
+label-occupied-foreground = ${colors.blue}
+label-occupied-underline = ${colors.foreground} 
+label-occupied-background = ${colors.background} 
+label-occupied-padding = 1
+label-urgent = %icon%
+label-urgent-foreground = ${colors.foreground}
+label-urgent-background = ${colors.alert}
+;label-urgent-underline = ${colors.alert}
+label-urgent-padding = 1
+label-empty = %icon%
+label-empty-foreground = ${colors.blue}
+label-empty-background = ${colors.background}
+;label-empty-underline = ${colors.blue}
+label-empty-padding = 1
+
+[module/weather]
+type = custom/script
+exec = ~/scripts/polybar/weather.sh
+label = "%output%"
+click-left = kitty w3m wttr.in/Torre_da_Marinha &
+interval = 1800
+
+[module/volume]
+type = custom/ipc
+hook-0          = ~/scripts/polybar/volume.sh
+click-right     = pavucontrol
+click-left      = ~/scripts/audio.sh "swap-audio"
+click-middle    = ~/scripts/audio.sh "mute-sink"
+scroll-up       = ~/scripts/audio.sh "change-volume" +5%
+scroll-down     = ~/scripts/audio.sh "change-volume" -5%
+initial         = 1
+
+[module/kdeconnect]
+type = custom/script
+exec = "~/.config/polybar/scripts/kdeconnect.sh -d"
+tail = true
+
+[module/updates]
+type = custom/script
+exec = ~/scripts/polybar/updates.sh
+click-middle    = kitty yay -Syyu
+interval = 1800
+format-prefix = " "
+format-prefix-foreground = ${colors.blue}
+
+[module/nvidia]
+type = custom/script
+exec = ~/scripts/polybar/nvidia.sh "load"
+click-left= ~/scripts/polybar/nvidia.sh "notif"
+interval = 1
+format-prefix = "GPU: "
+format-prefix-foreground = ${colors.blue}
+
+[module/previous]
+type = custom/ipc
+;format-font = 2
+hook-0 = echo ""
+hook-1 = echo ""
+click-left = "spotifyctl -q previous"
+
+[module/next]
+type = custom/ipc
+;format-font = 2
+hook-0 = echo ""
+hook-1 = echo ""
+click-left = "spotifyctl -q next"
+
+[module/playpause]
+type = custom/ipc
+format-font = 2
+hook-0 = echo ""
+hook-2 = echo ""
+hook-1 = echo ""
+click-left = "spotifyctl -q playpause"
+
+[module/spotify]
+;monitor = ${env:MONITOR:HDMI-0}
+type = custom/ipc
+hook-0 = echo "I'm doing nothing!"
+hook-1 = spotifyctl -q status --format '%artist%: %title%'
+format_prefix = ""
+format_prefix_label = ${colors.green}
+
+
+
+[module/cpu]
+type                        = internal/cpu
+interval                    = 2
+format-prefix               = "﬙"
+format-prefix-foreground    = ${colors.blue}
+mouse-left                  = "kitty bpytop"
+label                       = %percentage:2%%
+
+;format-underline = #f90000
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.blue}
+;format-underline = #4bffdc
+label = %percentage_used%%
+
+[module/date]
+type = internal/date
+interval = 5
+date =
+date-alt = %a, %d/%b/%y
+time = %H:%M
+time-alt =
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
+;format-underline = #0a6cf5
+label = %date% %time%
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC0
+full-at = 96
+format-charging = <animation-charging> <label-charging>
+;format-charging-underline = #ffb52a
+format-discharging = <animation-discharging> <label-discharging>
+;format-discharging-underline = ${self.format-charging-underline}
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.blue}
+;format-full-underline = ${self.format-charging-underline}
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-foreground = ${colors.blue}
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-foreground = ${colors.green}
+animation-charging-framerate = 750
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-foreground = ${colors.danger}
+animation-discharging-framerate = 750
+
+[module/mpd]
+type = internal/mpd
+; Host where mpd is running (either ip or domain name)
+; Can also be the full path to a unix socket where mpd is running.
+host = 192.168.1.199
+port = 6600
+;password = mysecretpassword
+; Seconds to sleep between progressbar/song timer sync
+; Default: 1
+interval = 1
+; Available tags:
+;   <label-song> (default)
+;   <label-time>
+;   <bar-progress>
+;   <toggle> - gets replaced with <icon-(pause|play)>
+;   <toggle-stop> - gets replaced with <icon-(stop|play)>
+;   <icon-random>
+;   <icon-repeat>
+;   <icon-repeatone> (deprecated)
+;   <icon-single> - Toggle playing only a single song. Replaces <icon-repeatone>
+;   <icon-consume>
+;   <icon-prev>
+;   <icon-stop>
+;   <icon-play>
+;   <icon-pause>
+;   <icon-next>
+;   <icon-seekb>
+;   <icon-seekf>
+format-online =  <label-time>  <label-song> <icon-prev> <toggle> <icon-next>
+format-playing = ${self.format-online}
+format-paused = <label-song> <icon-prev> <toggle> <icon-next> 
+format-stopped = <label-song> <icon-prev> <toggle> <icon-next>
+; Available tags:
+;   <label-offline>
+; Default: ""
+;format-offline = <label-offline>
+; Available tokens:
+;   %artist%
+;   %album-artist%
+;   %album%
+;   %date%
+;   %title%
+; Default: %artist% - %title%
+label-song = 𝄞 %artist% - %title%
+; Available tokens:
+;   %elapsed%
+;   %total%
+; Default: %elapsed% / %total%
+;label-time = %elapsed% / %total%
+; Available tokens:
+;   None
+label-offline = 🎜 mpd is offline
+; Only applies if <icon-X> is used
+icon-play = 
+icon-pause = 
+icon-stop = 
+icon-prev = 
+icon-next = 
+icon-seekb = ⏪
+icon-seekf = ⏩
+icon-random = 
+icon-repeat = 
+icon-repeatone = 🔂
+icon-single = 🔂
+icon-consume = ✀
+; Used to display the state of random/repeat/repeatone/single
+; Only applies if <icon-[random|repeat|repeatone|single]> is used
+toggle-on-foreground = #ff
+toggle-off-foreground = #55
+; Only applies if <bar-progress> is used
+bar-progress-width = 45
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 80
+format = <ramp> <label>
+format-warn = <ramp> <label-warn>
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.danger}
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.blue}
+
+[module/filesystem]
+type = internal/fs
+; Mountpoints to display
+mount-0 = /
+mount-1 = /home
+; Seconds to sleep between updates
+; Default: 30
+interval = 10
+; Display fixed precision values
+; Default: false
+fixed-values = true
+; Spacing between entries
+; Default: 2
+spacing = 2
+; Available tags:
+;   <label-mounted> (default)
+;   <bar-free>
+;   <bar-used>
+;   <ramp-capacity>
+format-mounted = <label-mounted>
+; Available tags:
+;   <label-unmounted> (default)
+format-unmounted = <label-unmounted>
+; Available tokens:
+;   %mountpoint%
+;   %type%
+;   %fsname%
+;   %percentage_free%
+;   %percentage_used%
+;   %total%
+;   %free%
+;   %used%
+; Default: %mountpoint% %percentage_free%%
+label-mounted = %free%/%total%
+; Available tokens:
+;   %mountpoint%
+; Default: %mountpoint% is not mounted
+label-unmounted = %mountpoint%: not mounted
+label-unmounted-foreground = #55
+
+; vim:ft=dosini
